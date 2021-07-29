@@ -26,7 +26,7 @@ import java.util.UUID;
 
 public class registrarpaciente extends AppCompatActivity {
 
-    EditText  nameTutor, firstname, lastname, birthname, imagBase64, decivename,macadress;
+    EditText  nameTutor, firstname, lastname, birthname, decivename,macadress;
     FirebaseDatabase firebaseDatabase;
 
     DatePickerDialog.OnDateSetListener setListener;
@@ -35,8 +35,7 @@ public class registrarpaciente extends AppCompatActivity {
     DatabaseReference databaseReference;
     String idUsuario;
     EditText etPlannedDate;
-
-
+    String base64imagen; /// en esta trabajas
     RadioButton rbtMasculino, rbtFemenino;
     String genero;
     @Override
@@ -48,7 +47,7 @@ public class registrarpaciente extends AppCompatActivity {
         lastname=findViewById(R.id.Editlastname);
 
 
-        imagBase64=findViewById(R.id.Editarimg);
+
         decivename=findViewById(R.id.EditarDecivename);
         macadress=findViewById(R.id.EditarMac);
         etPlannedDate=findViewById(R.id.EditaDate);
@@ -132,7 +131,7 @@ public class registrarpaciente extends AppCompatActivity {
 
         p.setGender(genero);
         
-        p.setImagBase64(imagBase64.getText().toString());
+        p.setImagBase64(base64imagen);
         p.setDecivename(decivename.getText().toString());
         p.setMacadress(macadress.getText().toString());
         p.setIdUsuario(idUsuario);

@@ -161,7 +161,6 @@
                     android:layout_marginLeft="10sp"
                     android:layout_weight="1"
                     android:isScrollContainer="false"
-                    android:onClick="openDataPicker"
                     android:text="Fecha"
                     android:textSize="11sp"
                     android:textStyle="bold"
@@ -206,20 +205,33 @@
                 android:layout_height="wrap_content"
                 android:text="Imagen" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:layout_marginBottom="5dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/Editarimg"
+                <ImageView
+                    android:id="@+id/imageView7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginRight="100dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/abel"
+                    android:text="Explorar"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/imagen"
+                    app:iconSize="25sp" />
+            </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
