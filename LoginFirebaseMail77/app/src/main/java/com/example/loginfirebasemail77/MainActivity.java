@@ -7,25 +7,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
-import com.example.loginfirebasemail77.modelos.paciente;
-import com.example.loginfirebasemail77.modelos.usuario;
-import com.firebase.ui.auth.AuthUI;
+import com.example.loginfirebasemail77.modelos.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,11 +28,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    Button btn_login,btn_registrar,btn_recuperar;
+
+    Button btn_login, btn_registrar, btn_recuperar;
     EditText et_pass;
     TextInputEditText et_mail;
     EditText username, idUsuario;
@@ -45,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    List<usuario>  list=new ArrayList<usuario>();
+    List<Usuario> list = new ArrayList<Usuario>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,14 +57,14 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
-        awesomeValidation.addValidation(this,R.id.et_mail, Patterns.EMAIL_ADDRESS,R.string.invalid_mail);
-        awesomeValidation.addValidation(this,R.id.et_pass,".{6,}",R.string.invalid_password);
+        awesomeValidation.addValidation(this, R.id.et_mail, Patterns.EMAIL_ADDRESS, R.string.invalid_mail);
+        awesomeValidation.addValidation(this, R.id.et_pass, ".{6,}", R.string.invalid_password);
 
 
         btn_registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,RegistrarActivity.class);
+                Intent i = new Intent(MainActivity.this, RegistrarActivity.class);
                 startActivity(i);
             }
         });
@@ -76,18 +72,15 @@ public class MainActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(awesomeValidation.validate())
-                {
-                    String mail= et_mail.getText().toString();
-                    String pass= et_pass.getText().toString();
-                    firebaseAuth.signInWithEmailAndPassword(mail,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                if (awesomeValidation.validate()) {
+                    String mail = et_mail.getText().toString();
+                    String pass = et_pass.getText().toString();
+                    firebaseAuth.signInWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(Task<AuthResult> task) {
-                            if(task.isSuccessful())
-                            {
-                            listapaciente();
-                            }else
-                            {
+                            if (task.isSuccessful()) {
+                                listapaciente();
+                            } else {
                                 String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
                                 dameToastdeerror(errorCode);
                             }
@@ -106,19 +99,20 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(this);
-        firebaseDatabase= FirebaseDatabase.getInstance();
-        databaseReference=firebaseDatabase.getReference();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
     }
-    public void irahome(String username, String idUseri)
-    {
 
-        Intent i = new Intent(this,HomeActivity.class);
-        i.putExtra("mail",et_mail.getText().toString());
-        i.putExtra("userName",username);
-        i.putExtra("id_usuario",idUseri);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+    public void irahome(String username, String idUseri) {
+
+        Intent i = new Intent(this, HomeActivity.class);
+        i.putExtra("mail", et_mail.getText().toString());
+        i.putExtra("userName", username);
+        i.putExtra("id_usuario", idUseri);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
 
@@ -127,11 +121,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                for (DataSnapshot objShaptshot : snapshot.getChildren())
-                {
-                    usuario u = objShaptshot.getValue(usuario.class);
+                for (DataSnapshot objShaptshot : snapshot.getChildren()) {
+                    Usuario u = objShaptshot.getValue(Usuario.class);
                     list.add(u);
-                    irahome(u.getUsername(),u.getIdUsuario());
+                    irahome(u.getUsername(), u.getIdUsuario());
                     //System.out.println("username: "+u.getUsername()+" id: "+u.getIdUsuario());
                     //username.setText(u.getUsername());
                     //idUsuario.setText(u.getIdUsuario());
@@ -139,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -180,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case "ERROR_REQUIRES_RECENT_LOGIN":
-                Toast.makeText(MainActivity.this,"Esta operación es sensible y requiere autenticación reciente. Inicie sesión nuevamente antes de volver a intentar esta solicitud.", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Esta operación es sensible y requiere autenticación reciente. Inicie sesión nuevamente antes de volver a intentar esta solicitud.", Toast.LENGTH_LONG).show();
                 break;
 
             case "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL":

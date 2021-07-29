@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.loginfirebasemail77.modelos.paciente;
+import com.example.loginfirebasemail77.modelos.Paciente;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,12 +24,12 @@ import java.util.List;
 
 public class listapacientes extends AppCompatActivity {
 
-    List<paciente>  list=new ArrayList<paciente>();
-    ArrayAdapter<paciente> arrayAdapterPaciente;
+    List<Paciente>  list=new ArrayList<Paciente>();
+    ArrayAdapter<Paciente> arrayAdapterPaciente;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     ListView listaView;
-    paciente pacienteSelect;
+    Paciente pacienteSelect;
     TextView textView;
     String idUsuario;
     @Override
@@ -45,7 +45,7 @@ public class listapacientes extends AppCompatActivity {
     listaView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-            pacienteSelect=(paciente) parent.getItemAtPosition(position);
+            pacienteSelect=(Paciente) parent.getItemAtPosition(position);
             String idpatient, nameTutor,firstname,lastname, birthname, gender, imagBase64, decivename,macadress,state;
             idpatient=pacienteSelect.getIdpatient();
             nameTutor=pacienteSelect.getNameTutor();
@@ -79,7 +79,7 @@ public class listapacientes extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                pacienteSelect=(paciente) parent.getItemAtPosition(position);
+                pacienteSelect=(Paciente) parent.getItemAtPosition(position);
                 textView.setText(pacienteSelect.getIdpatient()+"\n "
                                 +pacienteSelect.getBirthname()+"\n "
                                 +pacienteSelect.getGender()+"\n "
@@ -97,9 +97,9 @@ public class listapacientes extends AppCompatActivity {
                 list.clear();
                 for (DataSnapshot objShaptshot : snapshot.getChildren())
                 {
-                    paciente p= objShaptshot.getValue(paciente.class);
+                    Paciente p= objShaptshot.getValue(Paciente.class);
                     list.add(p);
-                    arrayAdapterPaciente= new ArrayAdapter<paciente>(listapacientes.this, android.R.layout.simple_list_item_1, list);
+                    arrayAdapterPaciente= new ArrayAdapter<Paciente>(listapacientes.this, android.R.layout.simple_list_item_1, list);
                     listaView.setAdapter(arrayAdapterPaciente);
                 }
             }

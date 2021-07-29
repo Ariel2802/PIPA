@@ -22,7 +22,7 @@ import com.google.mlkit.nl.translate.Translation;
 import com.google.mlkit.nl.translate.Translator;
 import com.google.mlkit.nl.translate.TranslatorOptions;
 
-public class reconocerIdioma extends AppCompatActivity {
+public class ReconocerIdioma extends AppCompatActivity {
     EditText etLangString;
     Button btnCheckNow;
     TextView tvResult;
@@ -63,7 +63,7 @@ public class reconocerIdioma extends AppCompatActivity {
                 String lanText=etLangString.getText().toString();
                 if(lanText.equals(""))
                 {
-                    Toast.makeText(reconocerIdioma.this,"Ingrese un texto por favor", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ReconocerIdioma.this,"Ingrese un texto por favor", Toast.LENGTH_SHORT).show();
                     
                 }else
                 {

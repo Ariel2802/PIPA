@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class recuperarPassActivity extends AppCompatActivity {
+public class RecuperarPassActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +15,7 @@ public class recuperarPassActivity extends AppCompatActivity {
     }
     public void addpaciente(View view)
     {
-        Intent i = new Intent(this,registrarpaciente.class);
+        Intent i = new Intent(this, RegistrarPaciente.class);
         startActivity(i);
     }
 }

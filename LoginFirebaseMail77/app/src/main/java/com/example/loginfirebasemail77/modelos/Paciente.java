@@ -1,6 +1,6 @@
 package com.example.loginfirebasemail77.modelos;
 
-public class paciente {
+public class Paciente {
     private String idpatient;
     private String nameTutor;
     private String firstname;
@@ -13,11 +13,11 @@ public class paciente {
     private String state;
     private String idUsuario;
 
-    public paciente() {
+    public Paciente() {
 
     }
 
-    public paciente(String idpatient, String nameTutor, String firstname, String lastname, String birthname, String gender, String imagBase64, String decivename, String macadress, String state, String idUsuario) {
+    public Paciente(String idpatient, String nameTutor, String firstname, String lastname, String birthname, String gender, String imagBase64, String decivename, String macadress, String state, String idUsuario) {
         this.idpatient = idpatient;
         this.nameTutor = nameTutor;
         this.firstname = firstname;

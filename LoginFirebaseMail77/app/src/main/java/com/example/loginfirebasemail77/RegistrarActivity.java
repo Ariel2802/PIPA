@@ -3,7 +3,6 @@ package com.example.loginfirebasemail77;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
-import com.example.loginfirebasemail77.modelos.usuario;
+import com.example.loginfirebasemail77.modelos.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -76,7 +75,7 @@ public class RegistrarActivity extends AppCompatActivity {
                         }
 
                         private void guardarTabla() {
-                            usuario u= new usuario();
+                            Usuario u= new Usuario();
                             u.setIdUsuario(UUID.randomUUID().toString());
                             u.setUsername(userName.getText().toString());
                             u.setEmail(mail);

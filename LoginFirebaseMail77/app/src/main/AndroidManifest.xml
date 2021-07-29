@@ -14,13 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".inf_marcador_adapter"></activity>
-        <activity android:name=".mapa" />
+        <activity android:name=".Mapa" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB5MkIB5lNnQH1kC1tZ3ATeEsv7z66moKs" />
 
-        <activity android:name=".reconocerIdioma" />
+        <activity android:name=".ReconocerIdioma" />
         <activity android:name=".animation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,9 +30,9 @@
         </activity>
         <activity android:name=".editarpaciente" />
         <activity android:name=".listapacientes" />
-        <activity android:name=".registrarpaciente" />
+        <activity android:name=".RegistrarPaciente" />
         <activity android:name=".RegistrarActivity" />
-        <activity android:name=".recuperarPassActivity" />
+        <activity android:name=".RecuperarPassActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".MainActivity" />
 

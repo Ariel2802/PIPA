@@ -7,30 +7,27 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.example.loginfirebasemail77.modelos.lista;
+import com.example.loginfirebasemail77.modelos.Lista;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickListener,
+public class Mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickListener,
         OnMapReadyCallback {
     private GoogleMap mapG;
     String campus="Campus Central";
     String imgCampus="ingenieria_vtgzuq_xy2pny.jpg";
     double latiG=-1.0128684338088096,logitiG=-79.46930575553893;
     int vista=1;
-    List<lista> facultades;
+    List<Lista> facultades;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,27 +38,27 @@ public class mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
         vista=2;
 
         facultades=new ArrayList<>();
-        facultades.add(new lista("FACULTAD DE CIENCIAS AGROPECUARIAS",
+        facultades.add(new Lista("FACULTAD DE CIENCIAS AGROPECUARIAS",
                 "-1.0809533698071374, -79.50269192673238",
                 "Ing. Leonardo Gonzalo Matute, M.Sc.",
                 "agraria_fsdshj.jpg"));
-        facultades.add(new lista("FACULTAD DE CIENCIAS DE LA INGENIERÍA",
+        facultades.add(new Lista("FACULTAD DE CIENCIAS DE LA INGENIERÍA",
                 "-1.0127542911580514, -79.47083072315361",
                 "Ing. Washington Alberto Chiriboga Casanova, M.Sc.",
                 "logo_fci_a0npdm.jpg"));
-        facultades.add(new lista("FACULTAD DE CIENCIAS EMPRESARIALES",
+        facultades.add(new Lista("FACULTAD DE CIENCIAS EMPRESARIALES",
                 "-1.0121821020306447, -79.47017069530311",
                 "Ing. Mariela Susana Andrade Arias, PhD",
                 "Empresariales_duhayc.jpg"));
-        facultades.add(new lista("FACULTAD DE CIENCIAS DE LA INDUSTRIA Y LA PRODUCCIÓN",
+        facultades.add(new Lista("FACULTAD DE CIENCIAS DE LA INDUSTRIA Y LA PRODUCCIÓN",
                 "-1.0812661596830198, -79.5029589900245",
                 "Ing. Sonnia Esther Barzola Miranda, M.Sc.",
                 "industriales_rxsgww.jpg"));
-        facultades.add(new lista("DECANO UNIDAD DE POSGRADO",
+        facultades.add(new Lista("DECANO UNIDAD DE POSGRADO",
                 "-1.0130542111468632, -79.46855806906344",
                 "Ing. Roque Vivas, M.Sc",
                 "posgrado_mcss9g.jpg"));
-        facultades.add(new lista("LIC. Enfermeria",
+        facultades.add(new Lista("LIC. Enfermeria",
                 "-1.0129917510549566, -79.46948730818116",
                 "Ing. Roque Vivas, M.Sc",
                 "LicEnfermeria_lmoxj9"));

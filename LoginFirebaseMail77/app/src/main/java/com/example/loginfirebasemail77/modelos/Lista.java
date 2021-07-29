@@ -1,12 +1,12 @@
 package com.example.loginfirebasemail77.modelos;
 
-public class lista {
+public class Lista {
     private String faculta;
     private String ubicación ;
     private String docente;
     private  String nombre;
 
-    public lista(String faculta, String ubicación, String docente, String nombre) {
+    public Lista(String faculta, String ubicación, String docente, String nombre) {
         this.faculta = faculta;
         this.ubicación = ubicación;
         this.docente = docente;
@@ -21,7 +21,7 @@ public class lista {
         this.nombre = nombre;
     }
 
-    public lista(String faculta, String ubicación, String docente) {
+    public Lista(String faculta, String ubicación, String docente) {
         this.faculta = faculta;
         this.ubicación = ubicación;
         this.docente = docente;
