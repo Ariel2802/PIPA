@@ -2,6 +2,8 @@ package com.example.loginfirebasemail77;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.loginfirebasemail77.modelos.adaptadorLista;
 import com.example.loginfirebasemail77.modelos.paciente;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +27,7 @@ import java.util.List;
 
 public class listapacientes extends AppCompatActivity {
 
-    List<paciente>  list=new ArrayList<paciente>();
+    List<paciente>  list=new ArrayList<>();
     ArrayAdapter<paciente> arrayAdapterPaciente;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -36,13 +39,13 @@ public class listapacientes extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listapacientes);
-        listaView=findViewById(R.id.listaComponentes);
+        //listaView=findViewById(R.id.listaComponentes);
         idUsuario=getIntent().getExtras().getString("idUsuario");
         inicializarFirebase();
         listapaciente();
-        textView=findViewById(R.id.nombresss);
+        //textView=findViewById(R.id.nombresss);
 
-        listaView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+       /* listaView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -86,8 +89,7 @@ public class listapacientes extends AppCompatActivity {
                                 +pacienteSelect.getGender()+"\n "
                                 +pacienteSelect.getMacadress());
             }
-        });
-
+        });*/
 
     }
 
@@ -100,9 +102,15 @@ public class listapacientes extends AppCompatActivity {
                 {
                     paciente p= objShaptshot.getValue(paciente.class);
                     list.add(p);
-                    arrayAdapterPaciente= new ArrayAdapter<paciente>(listapacientes.this, android.R.layout.simple_list_item_1, list);
-                    listaView.setAdapter(arrayAdapterPaciente);
+                    System.out.println(list);
+                    //arrayAdapterPaciente= new ArrayAdapter<paciente>(listapacientes.this, android.R.layout.simple_list_item_1, list);
+                    //listaView.setAdapter(arrayAdapterPaciente);
                 }
+                for (int i=0; i<list.size();i++)
+                {
+                   System.out.println("valor:" +list.get(i).getNameTutor());
+                }
+                ejecutar();
             }
 
             @Override
@@ -111,7 +119,16 @@ public class listapacientes extends AppCompatActivity {
             }
         });
     }
+    public void ejecutar()
+    {
 
+        adaptadorLista lista= new adaptadorLista(list, this);
+        RecyclerView recyclerView=findViewById(R.id.listaRevista);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(lista);
+
+    }
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(this);
         firebaseDatabase= FirebaseDatabase.getInstance();
