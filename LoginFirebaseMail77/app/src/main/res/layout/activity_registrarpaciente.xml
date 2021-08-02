@@ -61,6 +61,8 @@
                     tools:ignore="RtlCompat"></TextView>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +76,7 @@
                 android:layout_marginBottom="5dp">
 
                 <EditText
-                    android:id="@+id/txtEditNameTutor"
+                    android:id="@+id/txtNameTutor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -95,7 +97,7 @@
                 android:layout_marginBottom="5dp">
 
                 <EditText
-                    android:id="@+id/Editarfirtname"
+                    android:id="@+id/txtfirtname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -116,7 +118,7 @@
                 android:layout_marginBottom="5dp">
 
                 <EditText
-                    android:id="@+id/Editlastname"
+                    android:id="@+id/txtLastname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -142,7 +144,7 @@
                     android:layout_marginBottom="5dp">
 
                     <EditText
-                        android:id="@+id/EditaDate"
+                        android:id="@+id/txtDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clickable="true"
@@ -198,32 +200,34 @@
                     android:layout_height="wrap_content"
                     android:text="Femenino" />
             </RadioGroup>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Imagen" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView7"
+                    android:id="@+id/imgPerfil"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="119dp"
                     android:layout_weight="1"
-                    android:textAlignment="center"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    app:srcCompat="@drawable/imgperfil" />
 
                 <Button
                     android:id="@+id/button2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginRight="100dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginRight="120dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/abel"
                     android:text="Explorar"
@@ -231,8 +235,12 @@
                     android:textStyle="bold"
                     app:icon="@drawable/imagen"
                     app:iconSize="25sp" />
-            </LinearLayout>
 
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="167dp">
@@ -313,7 +321,7 @@
                 android:layout_marginBottom="5dp">
 
                 <EditText
-                    android:id="@+id/EditarDecivename"
+                    android:id="@+id/txtDecivename"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -334,7 +342,7 @@
                 android:layout_marginBottom="25dp">
 
                 <EditText
-                    android:id="@+id/EditarMac"
+                    android:id="@+id/txtMac"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"

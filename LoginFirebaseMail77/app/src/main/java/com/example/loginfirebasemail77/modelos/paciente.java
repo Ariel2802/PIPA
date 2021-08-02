@@ -111,10 +111,6 @@ public class paciente {
         this.state = state;
     }
 
-    public String getIdUsuario() {
-        return idUsuario;
-    }
-
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }

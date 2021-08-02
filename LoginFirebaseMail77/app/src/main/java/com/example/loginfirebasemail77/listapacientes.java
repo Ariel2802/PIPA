@@ -42,7 +42,8 @@ public class listapacientes extends AppCompatActivity {
         listapaciente();
         textView=findViewById(R.id.nombresss);
 
-    listaView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        listaView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
             pacienteSelect=(paciente) parent.getItemAtPosition(position);
@@ -59,7 +60,7 @@ public class listapacientes extends AppCompatActivity {
             state=pacienteSelect.getState();
 
             Intent i = new Intent(listapacientes.this,editarpaciente.class);
-            i.putExtra("idpatient",idpatient);
+           i.putExtra("idpatient",idpatient);
             i.putExtra("nameTutor",nameTutor);
             i.putExtra("firstname",firstname);
             i.putExtra("lastname",lastname);
@@ -91,7 +92,7 @@ public class listapacientes extends AppCompatActivity {
     }
 
     private void listapaciente() {
-        databaseReference.child("Paciente").orderByChild("idTutor").equalTo(idUsuario).addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Paciente").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
@@ -114,7 +115,6 @@ public class listapacientes extends AppCompatActivity {
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(this);
         firebaseDatabase= FirebaseDatabase.getInstance();
-        //firebaseDatabase.setPersistenceEnabled(true);
         databaseReference=firebaseDatabase.getReference();
     }
 }

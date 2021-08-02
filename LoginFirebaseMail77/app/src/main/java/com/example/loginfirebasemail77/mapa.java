@@ -7,18 +7,14 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.example.loginfirebasemail77.modelos.lista;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +26,7 @@ public class mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
     String imgCampus="ingenieria_vtgzuq_xy2pny.jpg";
     double latiG=-1.0128684338088096,logitiG=-79.46930575553893;
     int vista=1;
-    List<lista> facultades;
+    //List<lista> facultades;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +36,7 @@ public class mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
         mapFragment.getMapAsync(this);
         vista=2;
 
-        facultades=new ArrayList<>();
+        /*facultades=new ArrayList<>();
         facultades.add(new lista("FACULTAD DE CIENCIAS AGROPECUARIAS",
                 "-1.0809533698071374, -79.50269192673238",
                 "Ing. Leonardo Gonzalo Matute, M.Sc.",
@@ -64,7 +60,7 @@ public class mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
         facultades.add(new lista("LIC. Enfermeria",
                 "-1.0129917510549566, -79.46948730818116",
                 "Ing. Roque Vivas, M.Sc",
-                "LicEnfermeria_lmoxj9"));
+                "LicEnfermeria_lmoxj9"));*/
     }
     public void configurar(View v)
     {

@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.loginfirebasemail77.modelos.paciente;
@@ -21,43 +20,43 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.UUID;
 
 public class registrarpaciente extends AppCompatActivity {
 
     EditText  nameTutor, firstname, lastname, birthname, decivename,macadress;
     FirebaseDatabase firebaseDatabase;
-
+    DatabaseReference databaseReference;
     DatePickerDialog.OnDateSetListener setListener;
     Button btnFecha;
 
-    DatabaseReference databaseReference;
     String idUsuario;
     EditText etPlannedDate;
-    String base64imagen; /// en esta trabajas
+    String base64imagen="asdasdasdasdas"; /// en esta trabajas
     RadioButton rbtMasculino, rbtFemenino;
     String genero;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrarpaciente);
-        nameTutor=findViewById(R.id.txtEditNameTutor);
-        firstname=findViewById(R.id.Editarfirtname);
-        lastname=findViewById(R.id.Editlastname);
+        nameTutor=findViewById(R.id.txtNameTutor);
+        firstname=findViewById(R.id.txtfirtname);
+        lastname=findViewById(R.id.txtLastname);
 
 
 
-        decivename=findViewById(R.id.EditarDecivename);
-        macadress=findViewById(R.id.EditarMac);
-        etPlannedDate=findViewById(R.id.EditaDate);
+        decivename=findViewById(R.id.txtDecivename);
+        macadress=findViewById(R.id.txtMac);
+        etPlannedDate=findViewById(R.id.txtDate);
 
 
-        birthname=findViewById(R.id.EditaDate);
+        birthname=findViewById(R.id.txtDate);
         btnFecha=findViewById(R.id.btnFechaNacimiento);
 
         rbtMasculino=findViewById(R.id.radioButton);
         rbtFemenino=findViewById(R.id.radioButton2);
+
 
 
 
@@ -106,11 +105,6 @@ public class registrarpaciente extends AppCompatActivity {
         inicializarFirebase();
 
     }
-
-
-
-
-
     public void addFirebasePaciente(View view)
     {
         paciente p=new paciente();
@@ -128,9 +122,7 @@ public class registrarpaciente extends AppCompatActivity {
         {
             genero="Maculino";
         }
-
         p.setGender(genero);
-        
         p.setImagBase64(base64imagen);
         p.setDecivename(decivename.getText().toString());
         p.setMacadress(macadress.getText().toString());
@@ -138,7 +130,6 @@ public class registrarpaciente extends AppCompatActivity {
         p.setState("True");
 
         databaseReference.child("Paciente").child(p.getIdpatient()).setValue(p);
-
         Toast.makeText(this, "Agregado", Toast.LENGTH_SHORT).show();
 
     }
@@ -146,7 +137,6 @@ public class registrarpaciente extends AppCompatActivity {
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(this);
         firebaseDatabase=FirebaseDatabase.getInstance();
-        //firebaseDatabase.setPersistenceEnabled(true);
         databaseReference=firebaseDatabase.getReference();
     }
 
