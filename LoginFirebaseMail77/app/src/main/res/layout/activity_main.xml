@@ -9,13 +9,13 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     tools:context=".MainActivity">
+
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/losgo"
-        android:transitionName="logoImagen"
-        android:layout_marginTop="50dp">
-    </ImageView>
+        android:layout_marginTop="50dp"
+        android:src="@drawable/losgonawi"
+        android:transitionName="logoImagen"></ImageView>
 
     <TextView
         android:layout_width="match_parent"
@@ -23,11 +23,11 @@
         android:fontFamily="@font/abel"
         android:gravity="center"
         android:paddingLeft="20dp"
-        android:text="Bienvenido a caecus"
-        android:transitionName="textos"
-        android:textAlignment="textStart"
+        android:text="Bienvenido a Ñawi"
+        android:textAlignment="center"
         android:textColor="#353333"
         android:textSize="40sp"
+        android:transitionName="textos"
         tools:ignore="RtlCompat">
 
     </TextView>
@@ -84,12 +84,15 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:height="60dp"
+        android:backgroundTint="#4E9851"
         android:fontFamily="@font/abel"
         android:text="Login"
+        android:textAlignment="textStart"
         android:textColor="#fff"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:cornerRadius="10dp"></Button>
+        app:cornerRadius="10dp"
+        app:icon="@drawable/enter"></Button>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -103,7 +106,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:backgroundTint="#57AEAEAE"
+            android:backgroundTint="#70C373"
             android:fontFamily="@font/abel"
             android:isScrollContainer="false"
             android:text="Google"
@@ -123,11 +126,17 @@
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
-            android:backgroundTint="#FFA531"
+            android:backgroundTint="#FFC107"
             android:padding="5dp"
             android:text="Registrarme"
-            android:textColor="#fff"
-            app:cornerRadius="10dp"></Button>
+            android:textAlignment="textStart"
+            android:textColor="#3E3D3D"
+            android:textStyle="bold"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/register"
+            app:iconGravity="textStart"
+            app:iconSize="30dp"
+            app:iconTint="#403F3F"></Button>
     </LinearLayout>
 
     <Button
@@ -138,7 +147,7 @@
         android:background="#00DF5B51"
         android:padding="5dp"
         android:text="¿Olvidaste tu contraseña? recuperala aqui"
-        android:textColor="#AE6507"
+        android:textColor="#494847"
         android:textStyle="normal"></Button>
 
 

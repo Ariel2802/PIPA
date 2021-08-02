@@ -1,35 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10sp"
     android:orientation="vertical"
     tools:context=".listapacientes">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="118dp">
+        android:layout_width="397dp"
+        android:layout_height="146dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="135dp"
-            android:layout_height="110dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/imageView5"
+            android:layout_width="118dp"
+            android:layout_height="122dp"
+            android:layout_marginStart="276dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/mapa2" />
+            app:srcCompat="@drawable/informacion" />
 
         <TextView
             android:id="@+id/textView14"
             android:layout_width="261dp"
             android:layout_height="50dp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/abel"
             android:gravity="center"
-            android:text="Mapa del paciente"
+            android:text="Lista pacientes"
             android:textAlignment="textStart"
             android:textColor="#000"
             android:textSize="34sp"
@@ -41,26 +48,30 @@
             android:id="@+id/textView15"
             android:layout_width="262dp"
             android:layout_height="49dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="28dp"
             android:fontFamily="@font/abel"
             android:gravity="center"
-            android:text="Ubica a tu paciente por medio del mapa"
+            android:text="Recuerda siempre estar atento a tus seres queridos"
             android:textAlignment="textStart"
             android:textColor="#3C3C3C"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.029"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="RtlCompat"></TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listaRevista"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
+        android:layout_width="401dp"
+        android:layout_height="549dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="168dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="142dp" />
-</LinearLayout>
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
