@@ -111,24 +111,11 @@ public class paciente {
         this.state = state;
     }
 
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
+    public String getIdUsuario() {
+        return idUsuario;
     }
 
-    @Override
-    public String toString() {
-        return "paciente{" +
-                "idpatient='" + idpatient + '\'' +
-                ", nameTutor='" + nameTutor + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", birthname='" + birthname + '\'' +
-                ", gender='" + gender + '\'' +
-                ", imagBase64='" + imagBase64 + '\'' +
-                ", decivename='" + decivename + '\'' +
-                ", macadress='" + macadress + '\'' +
-                ", state='" + state + '\'' +
-                ", idUsuario='" + idUsuario + '\'' +
-                '}';
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

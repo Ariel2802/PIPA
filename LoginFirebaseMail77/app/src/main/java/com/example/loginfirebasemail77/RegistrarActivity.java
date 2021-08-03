@@ -31,7 +31,6 @@ public class RegistrarActivity extends AppCompatActivity {
     AwesomeValidation awesomeValidation;
     FirebaseAuth firebaseAuth;
     EditText  userName,numero;
-
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     @Override

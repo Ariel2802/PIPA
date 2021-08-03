@@ -76,7 +76,7 @@
                 android:layout_marginBottom="5dp">
 
                 <EditText
-                    android:id="@+id/txtNameTutor"
+                    android:id="@+id/txtNameTutor_R"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -97,7 +97,7 @@
                 android:layout_marginBottom="5dp">
 
                 <EditText
-                    android:id="@+id/txtfirtname"
+                    android:id="@+id/txtfirtname_R"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -118,7 +118,7 @@
                 android:layout_marginBottom="5dp">
 
                 <EditText
-                    android:id="@+id/txtLastname"
+                    android:id="@+id/txtLastname_R"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -144,7 +144,7 @@
                     android:layout_marginBottom="5dp">
 
                     <EditText
-                        android:id="@+id/txtDate"
+                        android:id="@+id/txtDate_R"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clickable="true"
@@ -156,7 +156,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-                    android:id="@+id/btnFechaNacimiento"
+                    android:id="@+id/btnFechaNacimiento_R"
                     android:layout_width="10dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="clip_vertical|center_vertical|fill_vertical"
@@ -188,14 +188,14 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/radioButton"
+                    android:id="@+id/radioButton_R"
                     android:layout_width="218dp"
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="Maculino" />
 
                 <RadioButton
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/radioButton2_R"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Femenino" />
@@ -321,7 +321,7 @@
                 android:layout_marginBottom="5dp">
 
                 <EditText
-                    android:id="@+id/txtDecivename"
+                    android:id="@+id/txtDecivename_R"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -342,7 +342,7 @@
                 android:layout_marginBottom="25dp">
 
                 <EditText
-                    android:id="@+id/txtMac"
+                    android:id="@+id/txtMac_R"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"

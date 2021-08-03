@@ -60,7 +60,7 @@ public class registrarpaciente extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener setListener;
     Button btnFecha;
 
-    String idUsuario;
+
     EditText etPlannedDate;
     String base64imagen="asdasdasdasdas"; /// en esta trabajas
     RadioButton rbtMasculino, rbtFemenino;
@@ -84,21 +84,25 @@ public class registrarpaciente extends AppCompatActivity {
     private static  final int STORAGE_PERMISSION_CODE=113;
 
     private GestureDetector gesto;
+
+    String idUsuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrarpaciente);
-        nameTutor=findViewById(R.id.txtNameTutor);
-        firstname=findViewById(R.id.txtfirtname);
-        lastname=findViewById(R.id.txtLastname);
+        //----Iniciando--los--componentes--------//
+        nameTutor=findViewById(R.id.txtNameTutor_R);
+        firstname=findViewById(R.id.txtfirtname_R);
+        lastname=findViewById(R.id.txtLastname_R);
         subir=findViewById(R.id.bntGuardar);
-        decivename=findViewById(R.id.txtDecivename);
-        macadress=findViewById(R.id.txtMac);
-        etPlannedDate=findViewById(R.id.txtDate);
-        birthname=findViewById(R.id.txtDate);
-        btnFecha=findViewById(R.id.btnFechaNacimiento);
-        rbtMasculino=findViewById(R.id.radioButton);
-        rbtFemenino=findViewById(R.id.radioButton2);
+        decivename=findViewById(R.id.txtDecivename_R);
+        macadress=findViewById(R.id.txtMac_R);
+        etPlannedDate=findViewById(R.id.txtDate_R);
+        birthname=findViewById(R.id.txtDate_R);
+        btnFecha=findViewById(R.id.btnFechaNacimiento_R);
+        rbtMasculino=findViewById(R.id.radioButton_R);
+        rbtFemenino=findViewById(R.id.radioButton2_R);
+        //----Fin--de-Iniciando--los--componentes--------//
 
         Calendar cal=Calendar.getInstance();
         int YEAR=cal.get(Calendar.YEAR);
@@ -141,12 +145,14 @@ public class registrarpaciente extends AppCompatActivity {
             }
         });
 
+
         idUsuario=getIntent().getExtras().getString("idUsuario");
+
+        System.out.println("id del usuario:"+idUsuario);
         inicializarFirebase();
 
         imagen= (ImageView) findViewById(R.id.imagemId);
         botonCargar= (Button) findViewById(R.id.btnCargarImg);
-
         botonCargar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,52 +160,9 @@ public class registrarpaciente extends AppCompatActivity {
 
             }
         });
-        gesto=new GestureDetector(this, new EscuchaGestos());
+
     }
     //---------------------------------------Fin del onCreate-------------------------------------//
-    @Override
-    public boolean onTouchEvent(MotionEvent event)
-    {
-        gesto.onTouchEvent(event);
-        return  super.onTouchEvent(event);
-    }
-    class EscuchaGestos extends GestureDetector.SimpleOnGestureListener
-    {
-       /* @Override
-        public void onLongPress(MotionEvent event)
-        {
-            Toast.makeText(registrarpaciente.this,"Presión larga ",Toast.LENGTH_SHORT );
-
-        }
-        @Override
-        public boolean onDoubleTap(MotionEvent event)
-        {
-            Toast.makeText(registrarpaciente.this,"Doble tag ",Toast.LENGTH_SHORT );
-            return true;
-        }*/
-        @Override
-        public void onShowPress(MotionEvent event)
-        {
-            Toast.makeText(registrarpaciente.this,"Presión corta",Toast.LENGTH_SHORT );
-        }
-
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            //De izquierda a derecha
-            if(e2.getX()>e1.getY())
-            {
-                Toast.makeText(registrarpaciente.this,"Desplazamiento a derecha",Toast.LENGTH_SHORT );
-            }else
-            {
-                Intent i = new Intent(registrarpaciente.this,listapacientes.class);
-                i.putExtra("idUsuario",idUsuario);
-                startActivity(i);
-                Toast.makeText(registrarpaciente.this,"Desplazamiento a la izquierda",Toast.LENGTH_SHORT );
-            }
-            return true;
-        }
-    }
-    //-----------------------------Programación para los gestos------------------------------------//
 
 
     public void OpenGallery() {
@@ -278,8 +241,8 @@ public class registrarpaciente extends AppCompatActivity {
         }
         p.setGender(genero);
         p.setDecivename(decivename.getText().toString());
-        p.setMacadress(macadress.getText().toString());
         p.setIdUsuario(idUsuario);
+   
         p.setState("True");
         databaseReference.child("Paciente").child(p.getIdpatient()).setValue(p);
         Toast.makeText(this, "Agregado", Toast.LENGTH_SHORT).show();
