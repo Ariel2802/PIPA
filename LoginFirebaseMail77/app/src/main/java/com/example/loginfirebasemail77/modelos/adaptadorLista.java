@@ -43,17 +43,38 @@ public class adaptadorLista extends RecyclerView.Adapter<adaptadorLista.ViewHold
     }
     public  void  setItems(List<paciente> items){Data=items;}
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView titulo;
+        TextView Nombre,Nacimiento,Genero,macAdress,deciveName,nameTutor;
+        String NombresCompletos="Sin nombre";
+        ImageView imgPerfil;
         ViewHolder(View itemView)
         {
             super(itemView);
-            titulo=itemView.findViewById(R.id.txtTitulo);
+            Nombre=itemView.findViewById(R.id.txtNombre);
+            imgPerfil=itemView.findViewById(R.id.imgFotoPaciente);
+            Nacimiento=itemView.findViewById(R.id.TxtNacimiento);
+            Genero=itemView.findViewById(R.id.txtGenero);
+            macAdress=itemView.findViewById(R.id.txtMacdispositivo);
+            deciveName=itemView.findViewById(R.id.txtDeciveName);
+            nameTutor=itemView.findViewById(R.id.txtNameTutorV);
+
 
         }
         void bindData(final  paciente item)
         {
-           // Picasso.get().load(item.getCover()).resize(100,100).centerCrop().into(imageRevista);
-            titulo.setText(item.getFirstname());
+            if(item.getImagBase64().length()<=0)
+            {
+                Picasso.get().load("https://res.cloudinary.com/durxpegdm/image/upload/v1627940101/3d-flame-279_xt18fx.png").resize(100,100).centerCrop().into(imgPerfil);
+            }else
+            {
+                Picasso.get().load(item.getImagBase64()).resize(100,100).centerCrop().into(imgPerfil);
+            }
+            NombresCompletos=item.getFirstname()+" "+item.getLastname();
+            Nombre.setText(NombresCompletos);
+            Nacimiento.setText("Nacimiento: "+item.getBirthname());
+            Genero.setText("Genero: "+item.getGender());
+            macAdress.setText("Dirección Mac: "+item.getMacadress());
+            deciveName.setText("Nombre del dispositivo: "+item.getDecivename());
+            nameTutor.setText("Nombre del tutor: "+item.getNameTutor());
 
         }
     }

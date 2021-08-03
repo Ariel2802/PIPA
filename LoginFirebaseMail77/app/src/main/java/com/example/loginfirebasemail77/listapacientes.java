@@ -7,11 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.loginfirebasemail77.modelos.adaptadorLista;
 import com.example.loginfirebasemail77.modelos.paciente;
@@ -35,6 +38,7 @@ public class listapacientes extends AppCompatActivity {
     paciente pacienteSelect;
     TextView textView;
     String idUsuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +94,24 @@ public class listapacientes extends AppCompatActivity {
                                 +pacienteSelect.getMacadress());
             }
         });*/
-
+    }
+    public void goaddPaciente(View view)
+    {
+        Intent i = new Intent(this,registrarpaciente.class);
+        i.putExtra("idUsuario",idUsuario);
+        startActivity(i);
+    }
+    public void goMapa(View view)
+    {
+        Intent i = new Intent(this,mapa.class);
+        i.putExtra("idUsuario",idUsuario);
+        startActivity(i);
+    }
+    public void goHome(View view)
+    {
+        Intent i = new Intent(this,HomeActivity.class);
+        i.putExtra("idUsuario",idUsuario);
+        startActivity(i);
     }
 
     private void listapaciente() {

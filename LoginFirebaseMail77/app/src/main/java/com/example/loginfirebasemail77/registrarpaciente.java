@@ -19,12 +19,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.loginfirebasemail77.modelos.paciente;
@@ -74,10 +77,13 @@ public class registrarpaciente extends AppCompatActivity {
     ImageView imagen;
     String path;
     Image image;
+    TextView tv;
     private static int RESULT_LOAD_IMAGE = 1;
     //fin de variables para imagenes
     private static final String TAG = "MiTag";
     private static  final int STORAGE_PERMISSION_CODE=113;
+
+    private GestureDetector gesto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,9 +154,53 @@ public class registrarpaciente extends AppCompatActivity {
 
             }
         });
-
+        gesto=new GestureDetector(this, new EscuchaGestos());
     }
-    //fin del onCreate
+    //---------------------------------------Fin del onCreate-------------------------------------//
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        gesto.onTouchEvent(event);
+        return  super.onTouchEvent(event);
+    }
+    class EscuchaGestos extends GestureDetector.SimpleOnGestureListener
+    {
+       /* @Override
+        public void onLongPress(MotionEvent event)
+        {
+            Toast.makeText(registrarpaciente.this,"Presión larga ",Toast.LENGTH_SHORT );
+
+        }
+        @Override
+        public boolean onDoubleTap(MotionEvent event)
+        {
+            Toast.makeText(registrarpaciente.this,"Doble tag ",Toast.LENGTH_SHORT );
+            return true;
+        }*/
+        @Override
+        public void onShowPress(MotionEvent event)
+        {
+            Toast.makeText(registrarpaciente.this,"Presión corta",Toast.LENGTH_SHORT );
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            //De izquierda a derecha
+            if(e2.getX()>e1.getY())
+            {
+                Toast.makeText(registrarpaciente.this,"Desplazamiento a derecha",Toast.LENGTH_SHORT );
+            }else
+            {
+                Intent i = new Intent(registrarpaciente.this,listapacientes.class);
+                i.putExtra("idUsuario",idUsuario);
+                startActivity(i);
+                Toast.makeText(registrarpaciente.this,"Desplazamiento a la izquierda",Toast.LENGTH_SHORT );
+            }
+            return true;
+        }
+    }
+    //-----------------------------Programación para los gestos------------------------------------//
+
 
     public void OpenGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -207,12 +257,6 @@ public class registrarpaciente extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
     }
     public  void  guardarTodo(String url)
     {
@@ -240,12 +284,14 @@ public class registrarpaciente extends AppCompatActivity {
         databaseReference.child("Paciente").child(p.getIdpatient()).setValue(p);
         Toast.makeText(this, "Agregado", Toast.LENGTH_SHORT).show();
     }
+    //--------------------------Iniciar Firebase-----------------------------------------------//
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(this);
         firebaseDatabase=FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference();
         storageReference= FirebaseStorage.getInstance().getReference().child("Fotos");
     }
+    //--------------------------Fin de Firebase-----------------------------------------------//
     //--------------------------------------------Parte de los permisos---------------------------------------------------//
     @Override
     protected void onResume()
