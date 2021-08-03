@@ -15,6 +15,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,11 @@ public class mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
     double latiG=-1.0128684338088096,logitiG=-79.46930575553893;
     int vista=1;
     //List<lista> facultades;
+
+    //-------varibales para inicializar Firebase----//
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    //----------------Fin de variables-------------//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +44,7 @@ public class mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         vista=2;
-
+        inicializarFirebase();
         /*facultades=new ArrayList<>();
         facultades.add(new lista("FACULTAD DE CIENCIAS AGROPECUARIAS",
                 "-1.0809533698071374, -79.50269192673238",
@@ -61,6 +70,12 @@ public class mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
                 "-1.0129917510549566, -79.46948730818116",
                 "Ing. Roque Vivas, M.Sc",
                 "LicEnfermeria_lmoxj9"));*/
+    }//fin del onCreate
+    private void inicializarFirebase() {
+        FirebaseApp.initializeApp(this);
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        databaseReference=firebaseDatabase.getReference();
+        //storageReference= FirebaseStorage.getInstance().getReference().child("Fotos");
     }
     public void configurar(View v)
     {

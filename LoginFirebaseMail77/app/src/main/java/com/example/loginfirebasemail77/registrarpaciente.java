@@ -40,6 +40,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -152,6 +153,7 @@ public class registrarpaciente extends AppCompatActivity {
         inicializarFirebase();
 
         imagen= (ImageView) findViewById(R.id.imagemId);
+        Picasso.get().load("https://res.cloudinary.com/durxpegdm/image/upload/v1627940101/3d-flame-279_xt18fx.png").resize(200,200).centerCrop().into(imagen);
         botonCargar= (Button) findViewById(R.id.btnCargarImg);
         botonCargar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,7 +244,7 @@ public class registrarpaciente extends AppCompatActivity {
         p.setGender(genero);
         p.setDecivename(decivename.getText().toString());
         p.setIdUsuario(idUsuario);
-   
+
         p.setState("True");
         databaseReference.child("Paciente").child(p.getIdpatient()).setValue(p);
         Toast.makeText(this, "Agregado", Toast.LENGTH_SHORT).show();

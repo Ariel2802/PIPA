@@ -214,12 +214,14 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imagemId"
                     android:layout_width="match_parent"
                     android:layout_height="119dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/imgperfil" />
+                    app:civ_border_color="#4CAF50"
+                    app:civ_border_width="2dp"
+                    app:srcCompat="@drawable/config" />
 
                 <Button
                     android:id="@+id/btnCargarImg"
