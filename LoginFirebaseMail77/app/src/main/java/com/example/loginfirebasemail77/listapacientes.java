@@ -31,14 +31,10 @@ import java.util.List;
 public class listapacientes extends AppCompatActivity {
 
     List<paciente>  list=new ArrayList<>();
-    ArrayAdapter<paciente> arrayAdapterPaciente;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    ListView listaView;
-    paciente pacienteSelect;
-    TextView textView;
     String idUsuario;
-
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,54 +42,10 @@ public class listapacientes extends AppCompatActivity {
         //listaView=findViewById(R.id.listaComponentes);
         idUsuario=getIntent().getExtras().getString("idUsuario");
         inicializarFirebase();
+        recyclerView=findViewById(R.id.listaRevista);
         listapaciente();
-        //textView=findViewById(R.id.nombresss);
+        
 
-       /* listaView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-        @Override
-        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-            pacienteSelect=(paciente) parent.getItemAtPosition(position);
-            String idpatient, nameTutor,firstname,lastname, birthname, gender, imagBase64, decivename,macadress,state;
-            idpatient=pacienteSelect.getIdpatient();
-            nameTutor=pacienteSelect.getNameTutor();
-            firstname=pacienteSelect.getFirstname();
-            lastname=pacienteSelect.getLastname();
-            birthname=pacienteSelect.getBirthname();
-            gender=pacienteSelect.getGender();
-            imagBase64=pacienteSelect.getImagBase64();
-            decivename=pacienteSelect.getDecivename();
-            macadress=pacienteSelect.getMacadress();
-            state=pacienteSelect.getState();
-
-            Intent i = new Intent(listapacientes.this,editarpaciente.class);
-           i.putExtra("idpatient",idpatient);
-            i.putExtra("nameTutor",nameTutor);
-            i.putExtra("firstname",firstname);
-            i.putExtra("lastname",lastname);
-            i.putExtra("birthname",birthname);
-            i.putExtra("gender",gender);
-            i.putExtra("imagBase64",imagBase64);
-            i.putExtra("decivename",decivename);
-            i.putExtra("macadress",macadress);
-            i.putExtra("state",state);
-
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(i);
-            return false;
-        }
-    });
-        listaView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                pacienteSelect=(paciente) parent.getItemAtPosition(position);
-                textView.setText(pacienteSelect.getIdpatient()+"\n "
-                                +pacienteSelect.getBirthname()+"\n "
-                                +pacienteSelect.getGender()+"\n "
-                                +pacienteSelect.getMacadress());
-            }
-        });*/
     }
     public void goaddPaciente(View view)
     {

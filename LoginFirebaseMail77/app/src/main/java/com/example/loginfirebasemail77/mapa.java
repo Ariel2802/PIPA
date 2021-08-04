@@ -1,12 +1,30 @@
 package com.example.loginfirebasemail77;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.loginfirebasemail77.modelos.paciente;
+import com.example.loginfirebasemail77.modelos.ubicaciones;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,27 +33,39 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.maps.android.PolyUtil;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickListener,
         OnMapReadyCallback {
-    private GoogleMap mapG;
-    String campus="Campus Central";
-    String imgCampus="ingenieria_vtgzuq_xy2pny.jpg";
-    double latiG=-1.0128684338088096,logitiG=-79.46930575553893;
-    int vista=1;
-    //List<lista> facultades;
+     GoogleMap mapG;
 
-    //-------varibales para inicializar Firebase----//
+    List<ubicaciones> list = new ArrayList<>();
+    List<ubicaciones> listL = new ArrayList<>();
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    //----------------Fin de variables-------------//
+
+    private List<ubicaciones> listUbicaciones = new ArrayList<ubicaciones>();
+    ArrayAdapter<ubicaciones> arrayAdapterUbicaciones;
+    ListView listaView;
+    ubicaciones ubicacionesSelect;
+    String log, la;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,147 +73,178 @@ public class mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        vista=2;
+
+        listaView = findViewById(R.id.listaUbicacion);
+
         inicializarFirebase();
-        /*facultades=new ArrayList<>();
-        facultades.add(new lista("FACULTAD DE CIENCIAS AGROPECUARIAS",
-                "-1.0809533698071374, -79.50269192673238",
-                "Ing. Leonardo Gonzalo Matute, M.Sc.",
-                "agraria_fsdshj.jpg"));
-        facultades.add(new lista("FACULTAD DE CIENCIAS DE LA INGENIERÍA",
-                "-1.0127542911580514, -79.47083072315361",
-                "Ing. Washington Alberto Chiriboga Casanova, M.Sc.",
-                "logo_fci_a0npdm.jpg"));
-        facultades.add(new lista("FACULTAD DE CIENCIAS EMPRESARIALES",
-                "-1.0121821020306447, -79.47017069530311",
-                "Ing. Mariela Susana Andrade Arias, PhD",
-                "Empresariales_duhayc.jpg"));
-        facultades.add(new lista("FACULTAD DE CIENCIAS DE LA INDUSTRIA Y LA PRODUCCIÓN",
-                "-1.0812661596830198, -79.5029589900245",
-                "Ing. Sonnia Esther Barzola Miranda, M.Sc.",
-                "industriales_rxsgww.jpg"));
-        facultades.add(new lista("DECANO UNIDAD DE POSGRADO",
-                "-1.0130542111468632, -79.46855806906344",
-                "Ing. Roque Vivas, M.Sc",
-                "posgrado_mcss9g.jpg"));
-        facultades.add(new lista("LIC. Enfermeria",
-                "-1.0129917510549566, -79.46948730818116",
-                "Ing. Roque Vivas, M.Sc",
-                "LicEnfermeria_lmoxj9"));*/
-    }//fin del onCreate
+        obtenerUbicaciones();
+
+
+        listaView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                ubicacionesSelect = (ubicaciones) parent.getItemAtPosition(position);
+                String longitud = ubicacionesSelect.getCoorX();
+                String lalitud = ubicacionesSelect.getCoorY();
+                String FechaUbicacion = ubicacionesSelect.getFechaUbicación();
+                String MacDispositivo = ubicacionesSelect.getMacDispositivo();
+                System.out.println("Datos: " + longitud + " " + lalitud + " " + FechaUbicacion + " " + MacDispositivo);
+                dibujarMarcadorSeleccionado(longitud, lalitud, FechaUbicacion, MacDispositivo);
+                return false;
+
+            }
+        });
+    }
+
+    public void dibujarMarcadorSeleccionado(String longitud, String lalitud, String FechaUbicacion, String MacDispositivo) {
+
+        final LatLng melbourneLocation = new LatLng(Double.parseDouble(longitud), Double.parseDouble(lalitud));
+        Marker melbourne = mapG.addMarker(
+                new MarkerOptions()
+                        .position(melbourneLocation)
+                        .title(datosPaciente())
+                        .snippet("Fecha: " + FechaUbicacion + " \n" + "Mac: " + MacDispositivo));
+    }
+
+    public String datosPaciente() {
+        return "Pablo de los monteros";
+    }
+
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(this);
-        firebaseDatabase=FirebaseDatabase.getInstance();
-        databaseReference=firebaseDatabase.getReference();
-        //storageReference= FirebaseStorage.getInstance().getReference().child("Fotos");
-    }
-    public void configurar(View v)
-    {
-        RadioButton radioButton;
-        radioButton=findViewById(R.id.radioButton);
-        if(radioButton.isChecked())
-        {
-            latiG=-1.0128684338088096;
-            logitiG=-79.46930575553893;
-            campus="Campus Central";
-            imgCampus="ingenieria_vtgzuq_xy2pny.jpg";
-        }else
-        {
-            latiG=-1.0799763882093478;
-            logitiG= -79.50105832172973;
-            campus="Campus La Maria";
-            imgCampus="uteq_inaugura_nuevo_edificio_en_la_maria__20151026085715-1200x800_bqxygi.jpg";
-        }
-
-        LatLng coorInicial = new LatLng(latiG, logitiG);
-        mapG.setMapType(vista);
-        vista = vista<4?vista+1:1;
-
-        CameraPosition camaraP = new CameraPosition.Builder()
-                .target(coorInicial)
-                .zoom(18)
-                .bearing(0)
-                .tilt(0)
-                .build();
-        CameraUpdate cameraUpdate =
-                CameraUpdateFactory.newCameraPosition(camaraP);
-
-        mapG.animateCamera(cameraUpdate);
-        ponerMarcadores();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
 
     }
-    public void ponerMarcadores()
-    {
-        /*for(int i=0;i<facultades.size();i++)
-        {
-          String[] ubicacion=facultades.get(i).getUbicación().split(",");
-            double latitude,longitude;
-            latitude=Double.parseDouble(ubicacion[0]);
-            longitude=Double.parseDouble(ubicacion[1]);
-            final LatLng ads = new LatLng(latitude, longitude);
-            mapG.addMarker(
+
+    private void obtenerUbicaciones() {
+        databaseReference.child("ubicaciones").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for (DataSnapshot objShaptshot : snapshot.getChildren()) {
+                    ubicaciones p = objShaptshot.getValue(ubicaciones.class);
+                    list.add(p);
+                    arrayAdapterUbicaciones = new ArrayAdapter<ubicaciones>(mapa.this, android.R.layout.simple_list_item_1, list);
+                    listaView.setAdapter(arrayAdapterUbicaciones);
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void ejecutarMarcador() {
+        System.out.println("tamanio: " + list.size());
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("recorrido: " + list.get(i).getCoorX());
+            final LatLng melbourneLocation = new LatLng(Double.parseDouble(list.get(i).getCoorX()), Double.parseDouble(list.get(i).getCoorY()));
+            Marker melbourne = mapG.addMarker(
                     new MarkerOptions()
-                            .position(ads)
-                            .title(facultades.get(i).getFaculta())
-                            .snippet(""+facultades.get(i).getUbicación()+" & "+facultades.get(i).getDocente()+" & "+facultades.get(i).getNombre()+""));
+                            .position(melbourneLocation)
+                            .title("Melbourne")
+                            .snippet("Population: 4,137,400"));
         }
-        ponerFiguras();
 
-        LatLng uteqCampus = new LatLng(latiG+0.0002, logitiG);
-        Marker campusUteq = mapG.addMarker(
-                new MarkerOptions()
-                        .position(uteqCampus)
-                        .title(campus)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                        .snippet(" "+latiG+", "+logitiG+" & Rector & "+imgCampus+""));
-        campusUteq.showInfoWindow();*/
-
-    }
-    public  void ponerFiguras()
-    {
-        //Figura del campus de la ciudad
-        /*PolylineOptions figuraPrincipal = new PolylineOptions()
-                .add(new LatLng(-1.0123640378002916 , -79.46724191146544 ))
-                .add(new LatLng(-1.0131793019445348 , -79.46723118262943 ))
-                .add(new LatLng(-1.0129325772909452 , -79.47180166676536 ))
-                .add(new LatLng(-1.0119187283120508 , -79.47185213725422 ))
-                .add(new LatLng(-1.0123640378002916 , -79.46724191146544 ));
-        figuraPrincipal.width(8);
-        figuraPrincipal.color(R.color.colorPrimary);
-        mapG.addPolyline(figuraPrincipal);
-
-        //Figura del campus de la María
-        PolylineOptions figuraSecundaria = new PolylineOptions()
-                .add(new LatLng(-1.0786183199175454 ,-79.50135991117891 ))
-                .add(new LatLng(-1.083709672071642  ,-79.4967956123442  ))
-                .add(new LatLng(-1.0893288802614813 ,-79.50028696033628 ))
-                .add(new LatLng(-1.082773136361302  ,-79.50556655973678 ))
-                .add(new LatLng(-1.0802359745162262 ,-79.5041189276441  ))
-                .add(new LatLng(-1.0788226552740785 ,-79.50244989299698 ))
-                .add(new LatLng(-1.0786183199175454 ,-79.50135991117891 ));
-        figuraSecundaria.width(8);
-        figuraSecundaria.color(R.color.design_default_color_primary);
-        mapG.addPolyline(figuraSecundaria);
-
-        mapG.setInfoWindowAdapter(new inf_marcador_adapter(mapa.this));
-        mapG.setMapType(vista);*/
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mapG = googleMap;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         mapG.getUiSettings().setZoomControlsEnabled(true);
-        mapG.setOnMarkerClickListener(this);
-        LatLng uteq = new LatLng(latiG, logitiG);
-        CameraPosition camaraP = new CameraPosition.Builder()
-                .target(uteq)
-                .zoom(18)
-                .bearing(0)
-                .tilt(0)
-                .build();
-        CameraUpdate cameraUpdate =
-                CameraUpdateFactory.newCameraPosition(camaraP);
-        mapG.animateCamera(cameraUpdate);
-        ponerMarcadores();
+        mapG.setMyLocationEnabled(true);
+        mapG.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+            @Override
+            public void onMyLocationChange(Location location) {
+                System.out.println("aaaaa"+location.getLatitude());
+                log=""+location.getLongitude();
+                la=""+location.getLatitude();
+                final LatLng melbourneLocation = new LatLng(Double.parseDouble(la), Double.parseDouble(log));
+                Marker melbourne = mapG.addMarker(
+                        new MarkerOptions()
+                                .position(melbourneLocation)
+                                .title("Melbourne")
+                                .snippet("Population: 4,137,400"));
+            }
+        });
+    }
+    JSONObject jso;
+    public void funcionVolley(View view)
+    {
+        String url ="https://maps.googleapis.com/maps/api/directions/json?origin="+la+","+log+"&destination=-0.20119975454204073, -79.08866386233856&key=AIzaSyC0vPHN0b2QcoPq2yE9eYUAibG3TWprZqA&mode=drive";
+        System.out.println("url:"+url);
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+
+                try {
+                    jso = new JSONObject(response);
+                    //trazarRuta(jso);
+                    Log.i("jsonRuta: ",""+response);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+    private void trazarRuta(JSONObject jso) {
+
+        JSONArray jRoutes;
+        JSONArray jLegs;
+        JSONArray jSteps;
+
+        try {
+            jRoutes = jso.getJSONArray("routes");
+            for (int i=0; i<jRoutes.length();i++){
+
+                jLegs = ((JSONObject)(jRoutes.get(i))).getJSONArray("legs");
+
+                for (int j=0; j<jLegs.length();j++){
+
+                    jSteps = ((JSONObject)jLegs.get(j)).getJSONArray("steps");
+
+                    for (int k = 0; k<jSteps.length();k++){
+
+
+                        String polyline = ""+((JSONObject)((JSONObject)jSteps.get(k)).get("polyline")).get("points");
+                        Log.i("end",""+polyline);
+                        List<LatLng> list = PolyUtil.decode(polyline);
+                        mapG.addPolyline(new PolylineOptions().addAll(list).color(Color.GRAY).width(5));
+
+
+
+                    }
+
+
+
+                }
+
+
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
     @Override
     public boolean onMarkerClick( Marker marker) {
@@ -198,4 +259,54 @@ public class mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
         }
         return false;
     }
+      /*private void agregarPrueba()
+    {
+        List<ubicaciones> ubicacionesX;
+        ubicacionesX=new ArrayList<>();
+        ubicacionesX.add(new ubicaciones(
+                UUID.randomUUID().toString(),
+                "15/05/2020",
+                " -0.2386985239372658",
+                "-79.16854318904792",
+                "wxyz"));
+        ubicacionesX.add(new ubicaciones(
+                UUID.randomUUID().toString(),
+                "16/05/2020",
+                "-0.23955682333007444",
+                "-79.1697662762788",
+                "wxyz"));
+        ubicacionesX.add(new ubicaciones(
+                UUID.randomUUID().toString(),
+                "17/05/2020",
+                "-0.23797969815455983",
+                "-79.16518506358065",
+                "wxyz"));
+        ubicacionesX.add(new ubicaciones(
+                UUID.randomUUID().toString(),
+                "18/05/2020",
+                "-0.23803334187098443",
+                "-79.16565713233643",
+                "wxyz"));
+        ubicacionesX.add(new ubicaciones(
+                UUID.randomUUID().toString(),
+                "20/05/2020",
+                "-0.23790459695122698",
+                "-79.1676419668778",
+                "wxyz"));
+
+        for(int i=0; i<ubicacionesX.size(); i++)
+        {
+            ubicaciones m=new ubicaciones();
+            m.setIdUbicacion(ubicacionesX.get(i).getIdUbicacion());
+            m.setCoorX(ubicacionesX.get(i).getCoorX());
+            m.setCoorY(ubicacionesX.get(i).getCoorY());
+            m.setFechaUbicación(ubicacionesX.get(i).getFechaUbicación());
+            m.setMacDispositivo(ubicacionesX.get(i).getMacDispositivo());
+            databaseReference.child("ubicaciones").child(m.getIdUbicacion()).setValue(m);
+        }
+
+        Toast.makeText(this, " ubicaciones", Toast.LENGTH_SHORT).show();
+
+    }*/
+
 }

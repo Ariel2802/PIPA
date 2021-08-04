@@ -4,8 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET " />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="android.permission.CAMERA" />
+
 
     <application
         android:name=".Myapplicationfirebase"
@@ -18,9 +20,7 @@
         <activity android:name=".tiemporeal"></activity>
         <activity android:name=".mapa" />
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB5MkIB5lNnQH1kC1tZ3ATeEsv7z66moKs" />
+
 
         <activity android:name=".reconocerIdioma" />
         <activity android:name=".animation">
@@ -44,6 +44,10 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC0vPHN0b2QcoPq2yE9eYUAibG3TWprZqA" />
     </application>
+
 
 </manifest>
