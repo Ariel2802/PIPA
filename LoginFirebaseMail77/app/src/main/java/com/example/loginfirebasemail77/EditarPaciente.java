@@ -12,7 +12,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class editarpaciente extends AppCompatActivity {
+public class EditarPaciente extends AppCompatActivity {
     EditText nameTutor,firstname,lastname,birthname,imagBase64,decivename,macadress;
     TextView gender;
     String idpatient;

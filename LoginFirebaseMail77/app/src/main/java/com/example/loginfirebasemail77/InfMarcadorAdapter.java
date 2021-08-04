@@ -10,10 +10,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 import com.squareup.picasso.Picasso;
 
-public class inf_marcador_adapter implements GoogleMap.InfoWindowAdapter {
+public class Inf_Marcador_Adapter implements GoogleMap.InfoWindowAdapter {
 
     Context context;
-    public inf_marcador_adapter(Context context) {
+    public Inf_Marcador_Adapter(Context context) {
         this.context=context;
     }
 

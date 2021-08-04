@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class listapacientes extends AppCompatActivity {
+public class ListaPacientes extends AppCompatActivity {
 
     List<Paciente>  list=new ArrayList<Paciente>();
     ArrayAdapter<Paciente> arrayAdapterPaciente;
