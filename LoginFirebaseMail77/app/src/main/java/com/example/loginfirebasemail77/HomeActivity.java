@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     }
     public void goLista(View view)
     {
-        Intent i = new Intent(HomeActivity.this,listapacientes.class);
+        Intent i = new Intent(HomeActivity.this, ListaPacientes.class);
         i.putExtra("idUsuario",idUsuario);
         startActivity(i);
     }

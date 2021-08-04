@@ -58,7 +58,7 @@ public class ListaPacientes extends AppCompatActivity {
             macadress=pacienteSelect.getMacadress();
             state=pacienteSelect.getState();
 
-            Intent i = new Intent(listapacientes.this,editarpaciente.class);
+            Intent i = new Intent(ListaPacientes.this,EditarPaciente.class);
             i.putExtra("idpatient",idpatient);
             i.putExtra("nameTutor",nameTutor);
             i.putExtra("firstname",firstname);
@@ -99,7 +99,7 @@ public class ListaPacientes extends AppCompatActivity {
                 {
                     Paciente p= objShaptshot.getValue(Paciente.class);
                     list.add(p);
-                    arrayAdapterPaciente= new ArrayAdapter<Paciente>(listapacientes.this, android.R.layout.simple_list_item_1, list);
+                    arrayAdapterPaciente= new ArrayAdapter<Paciente>(ListaPacientes.this, android.R.layout.simple_list_item_1, list);
                     listaView.setAdapter(arrayAdapterPaciente);
                 }
             }

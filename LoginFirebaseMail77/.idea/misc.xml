@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Arialdo/Documents/POODM/PI/PIPA/LoginFirebaseMail77/app/src/main/res/layout/activity_animation.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Arialdo/Documents/POODM/PI/PIPA/LoginFirebaseMail77/app/src/main/res/layout/activity_editarpaciente.xml" value="0.264" />
+        <entry key="..\:/Users/Arialdo/Documents/POODM/PI/PIPA/LoginFirebaseMail77/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Arialdo/Documents/POODM/PI/PIPA/LoginFirebaseMail77/app/src/main/res/layout/activity_inf_marcador_adapter.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Arialdo/Documents/POODM/PI/PIPA/LoginFirebaseMail77/app/src/main/res/layout/activity_listapacientes.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Arialdo/Documents/POODM/PI/PIPA/LoginFirebaseMail77/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Arialdo/Documents/POODM/PI/PIPA/LoginFirebaseMail77/app/src/main/res/layout/activity_recognition.xml" value="0.11927083333333334" />
         <entry key="..\:/Users/Arialdo/Documents/POODM/PI/PIPA/LoginFirebaseMail77/app/src/main/res/layout/activity_registrarpaciente.xml" value="0.11927083333333334" />
       </map>

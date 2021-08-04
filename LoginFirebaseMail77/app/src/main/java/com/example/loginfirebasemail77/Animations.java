@@ -49,7 +49,7 @@ public class Animations extends AppCompatActivity {
                 pairs[1]=new Pair<View, String>(textView1, "textos");
                 if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP)
                 {
-                    ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(animation.this, pairs);
+                    ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(Animations.this, pairs);
                     startActivity(i,options.toBundle());
                 }else
                 {
