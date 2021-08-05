@@ -1,16 +1,16 @@
 package com.example.loginfirebasemail77.modelos;
 
-public class usuario {
+public class Usuario {
     private String idUsuario;
     private String username;
     private String email;
     private String numero;
 
-    public usuario() {
+    public Usuario() {
 
     }
 
-    public usuario(String idUsuario, String username, String email, String numero) {
+    public Usuario(String idUsuario, String username, String email, String numero) {
         this.idUsuario = idUsuario;
         this.username = username;
         this.email = email;

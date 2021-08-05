@@ -1,7 +1,6 @@
 package com.example.loginfirebasemail77;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityOptionsCompat;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -16,7 +15,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class animation extends AppCompatActivity {
+public class Animations extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +42,14 @@ public class animation extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(animation.this,MainActivity.class);
+                Intent i = new Intent(Animations.this,MainActivity.class);
 
                 Pair[] pairs= new Pair[2];
                 pairs[0]=new Pair<View, String>(imageView, "logoImagen");
                 pairs[1]=new Pair<View, String>(textView1, "textos");
                 if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP)
                 {
-                    ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(animation.this, pairs);
+                    ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(Animations.this, pairs);
                     startActivity(i,options.toBundle());
                 }else
                 {

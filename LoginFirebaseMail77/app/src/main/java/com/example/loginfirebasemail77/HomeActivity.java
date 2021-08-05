@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
@@ -37,25 +36,25 @@ public class HomeActivity extends AppCompatActivity {
     }
     public void goLista(View view)
     {
-        Intent i = new Intent(HomeActivity.this,listapacientes.class);
+        Intent i = new Intent(HomeActivity.this, ListaPacientes.class);
         i.putExtra("idUsuario",idUsuario);
         startActivity(i);
     }
     public void goMapa(View view)
     {
-        Intent i = new Intent(HomeActivity.this,mapa.class);
+        Intent i = new Intent(HomeActivity.this, Mapa.class);
         i.putExtra("idUsuario",idUsuario);
         startActivity(i);
     }
     public void goReconocimientoIdioma(View view)
     {
-        Intent i = new Intent(HomeActivity.this,reconocerIdioma.class);
+        Intent i = new Intent(HomeActivity.this, ReconocerIdioma.class);
         i.putExtra("idUsuario",idUsuario);
         startActivity(i);
     }
     public void addPaciente(View view)
     {
-        Intent i = new Intent(this,registrarpaciente.class);
+        Intent i = new Intent(this, RegistrarPaciente.class);
         i.putExtra("idUsuario",idUsuario);
         startActivity(i);
     }
