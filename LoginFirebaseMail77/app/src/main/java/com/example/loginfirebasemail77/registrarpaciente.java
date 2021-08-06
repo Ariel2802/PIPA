@@ -27,7 +27,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
 import java.util.UUID;
 
-public class RegistrarPaciente extends AppCompatActivity {
+public class registrarpaciente extends AppCompatActivity {
 
     EditText nameTutor, firstname, lastname, birthname, decivename, macadress;
     FirebaseDatabase firebaseDatabase;
@@ -48,17 +48,17 @@ public class RegistrarPaciente extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrarpaciente);
-        nameTutor = findViewById(R.id.txtEditNameTutor);
-        firstname = findViewById(R.id.Editarfirtname);
-        lastname = findViewById(R.id.Editlastname);
+        nameTutor = findViewById(R.id.txtNameTutor_R);
+        firstname = findViewById(R.id.txtfirtname_R);
+        lastname = findViewById(R.id.txtLastname_R);
 
 
-        decivename = findViewById(R.id.EditarDecivename);
-        macadress = findViewById(R.id.EditarMac);
-        etPlannedDate = findViewById(R.id.EditaDate);
+        decivename = findViewById(R.id.txtDecivename_R);
+        macadress = findViewById(R.id.txtMac_R);
+        etPlannedDate = findViewById(R.id.txtDate_R);
 
 
-        birthname = findViewById(R.id.EditaDate);
+        birthname = findViewById(R.id.txtDate_R);
         btnFecha = findViewById(R.id.btnFechaNacimiento);
 
         rbtMasculino = findViewById(R.id.radioButton);
@@ -75,7 +75,7 @@ public class RegistrarPaciente extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        RegistrarPaciente.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth
+                        registrarpaciente.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth
                         , setListener, YEAR, MES, DIA);
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 datePickerDialog.show();
@@ -94,7 +94,7 @@ public class RegistrarPaciente extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        RegistrarPaciente.this, new DatePickerDialog.OnDateSetListener() {
+                        registrarpaciente.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         month = month + 1;
@@ -124,7 +124,7 @@ public class RegistrarPaciente extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             if (requestCode == 1 && resultCode == RESULT_OK && null != data) {
-                ImageView imageView = (ImageView) findViewById(R.id.imgPaciente);
+                ImageView imageView = (ImageView) findViewById(R.id.imagemId);
                 imageView.setImageURI(data.getData());
 
                 // Convert bitmap to base64 encoded string

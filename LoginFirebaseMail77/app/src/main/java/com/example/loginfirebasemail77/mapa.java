@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 import com.example.loginfirebasemail77.modelos.Lista;
+=======
+>>>>>>> parent of f8958c6 (ruta)
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,6 +19,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+<<<<<<< HEAD
+=======
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+>>>>>>> parent of f8958c6 (ruta)
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +37,16 @@ public class Mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
     String imgCampus="ingenieria_vtgzuq_xy2pny.jpg";
     double latiG=-1.0128684338088096,logitiG=-79.46930575553893;
     int vista=1;
+<<<<<<< HEAD
     List<Lista> facultades;
+=======
+    //List<lista> facultades;
+
+    //-------varibales para inicializar Firebase----//
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    //----------------Fin de variables-------------//
+>>>>>>> parent of f8958c6 (ruta)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +55,7 @@ public class Mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         vista=2;
+<<<<<<< HEAD
 
         facultades=new ArrayList<>();
         facultades.add(new Lista("FACULTAD DE CIENCIAS AGROPECUARIAS",
@@ -62,6 +82,40 @@ public class Mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
                 "-1.0129917510549566, -79.46948730818116",
                 "Ing. Roque Vivas, M.Sc",
                 "LicEnfermeria_lmoxj9"));
+=======
+        inicializarFirebase();
+        /*facultades=new ArrayList<>();
+        facultades.add(new lista("FACULTAD DE CIENCIAS AGROPECUARIAS",
+                "-1.0809533698071374, -79.50269192673238",
+                "Ing. Leonardo Gonzalo Matute, M.Sc.",
+                "agraria_fsdshj.jpg"));
+        facultades.add(new lista("FACULTAD DE CIENCIAS DE LA INGENIERÍA",
+                "-1.0127542911580514, -79.47083072315361",
+                "Ing. Washington Alberto Chiriboga Casanova, M.Sc.",
+                "logo_fci_a0npdm.jpg"));
+        facultades.add(new lista("FACULTAD DE CIENCIAS EMPRESARIALES",
+                "-1.0121821020306447, -79.47017069530311",
+                "Ing. Mariela Susana Andrade Arias, PhD",
+                "Empresariales_duhayc.jpg"));
+        facultades.add(new lista("FACULTAD DE CIENCIAS DE LA INDUSTRIA Y LA PRODUCCIÓN",
+                "-1.0812661596830198, -79.5029589900245",
+                "Ing. Sonnia Esther Barzola Miranda, M.Sc.",
+                "industriales_rxsgww.jpg"));
+        facultades.add(new lista("DECANO UNIDAD DE POSGRADO",
+                "-1.0130542111468632, -79.46855806906344",
+                "Ing. Roque Vivas, M.Sc",
+                "posgrado_mcss9g.jpg"));
+        facultades.add(new lista("LIC. Enfermeria",
+                "-1.0129917510549566, -79.46948730818116",
+                "Ing. Roque Vivas, M.Sc",
+                "LicEnfermeria_lmoxj9"));*/
+    }//fin del onCreate
+    private void inicializarFirebase() {
+        FirebaseApp.initializeApp(this);
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        databaseReference=firebaseDatabase.getReference();
+        //storageReference= FirebaseStorage.getInstance().getReference().child("Fotos");
+>>>>>>> parent of f8958c6 (ruta)
     }
     public void configurar(View v)
     {
@@ -80,6 +134,7 @@ public class Mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
             campus="Campus La Maria";
             imgCampus="uteq_inaugura_nuevo_edificio_en_la_maria__20151026085715-1200x800_bqxygi.jpg";
         }
+<<<<<<< HEAD
 
         LatLng coorInicial = new LatLng(latiG, logitiG);
         mapG.setMapType(vista);
@@ -97,6 +152,25 @@ public class Mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
         mapG.animateCamera(cameraUpdate);
         ponerMarcadores();
 
+=======
+
+        LatLng coorInicial = new LatLng(latiG, logitiG);
+        mapG.setMapType(vista);
+        vista = vista<4?vista+1:1;
+
+        CameraPosition camaraP = new CameraPosition.Builder()
+                .target(coorInicial)
+                .zoom(18)
+                .bearing(0)
+                .tilt(0)
+                .build();
+        CameraUpdate cameraUpdate =
+                CameraUpdateFactory.newCameraPosition(camaraP);
+
+        mapG.animateCamera(cameraUpdate);
+        ponerMarcadores();
+
+>>>>>>> parent of f8958c6 (ruta)
     }
     public void ponerMarcadores()
     {
@@ -114,6 +188,18 @@ public class Mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
                             .snippet(""+facultades.get(i).getUbicación()+" & "+facultades.get(i).getDocente()+" & "+facultades.get(i).getNombre()+""));
         }
         ponerFiguras();
+<<<<<<< HEAD
+
+        LatLng uteqCampus = new LatLng(latiG+0.0002, logitiG);
+        Marker campusUteq = mapG.addMarker(
+                new MarkerOptions()
+                        .position(uteqCampus)
+                        .title(campus)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                        .snippet(" "+latiG+", "+logitiG+" & Rector & "+imgCampus+""));
+        campusUteq.showInfoWindow();*/
+=======
+>>>>>>> parent of f8958c6 (ruta)
 
         LatLng uteqCampus = new LatLng(latiG+0.0002, logitiG);
         Marker campusUteq = mapG.addMarker(
@@ -124,6 +210,35 @@ public class Mapa extends AppCompatActivity implements GoogleMap.OnMarkerClickLi
                         .snippet(" "+latiG+", "+logitiG+" & Rector & "+imgCampus+""));
         campusUteq.showInfoWindow();*/
 
+    }
+    public  void ponerFiguras()
+    {
+        //Figura del campus de la ciudad
+        /*PolylineOptions figuraPrincipal = new PolylineOptions()
+                .add(new LatLng(-1.0123640378002916 , -79.46724191146544 ))
+                .add(new LatLng(-1.0131793019445348 , -79.46723118262943 ))
+                .add(new LatLng(-1.0129325772909452 , -79.47180166676536 ))
+                .add(new LatLng(-1.0119187283120508 , -79.47185213725422 ))
+                .add(new LatLng(-1.0123640378002916 , -79.46724191146544 ));
+        figuraPrincipal.width(8);
+        figuraPrincipal.color(R.color.colorPrimary);
+        mapG.addPolyline(figuraPrincipal);
+
+        //Figura del campus de la María
+        PolylineOptions figuraSecundaria = new PolylineOptions()
+                .add(new LatLng(-1.0786183199175454 ,-79.50135991117891 ))
+                .add(new LatLng(-1.083709672071642  ,-79.4967956123442  ))
+                .add(new LatLng(-1.0893288802614813 ,-79.50028696033628 ))
+                .add(new LatLng(-1.082773136361302  ,-79.50556655973678 ))
+                .add(new LatLng(-1.0802359745162262 ,-79.5041189276441  ))
+                .add(new LatLng(-1.0788226552740785 ,-79.50244989299698 ))
+                .add(new LatLng(-1.0786183199175454 ,-79.50135991117891 ));
+        figuraSecundaria.width(8);
+        figuraSecundaria.color(R.color.design_default_color_primary);
+        mapG.addPolyline(figuraSecundaria);
+
+        mapG.setInfoWindowAdapter(new inf_marcador_adapter(mapa.this));
+        mapG.setMapType(vista);*/
     }
     public  void ponerFiguras()
     {

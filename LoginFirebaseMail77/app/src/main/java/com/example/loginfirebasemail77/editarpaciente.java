@@ -22,14 +22,14 @@ public class EditarPaciente extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editarpaciente);
-        nameTutor=findViewById(R.id.EditNameTutoor);
-        firstname=findViewById(R.id.Editarrfirtname);
-        lastname=findViewById(R.id.Editarrlastname);
-        birthname=findViewById(R.id.EditarrDate);
-        gender=findViewById(R.id.EditarrtextView5);
-        imagBase64=findViewById(R.id.Editarrimg);
-        decivename=findViewById(R.id.EditarrDecivename);
-        macadress=findViewById(R.id.EditarrMac);
+        nameTutor=findViewById(R.id.txtNameTutor);
+        firstname=findViewById(R.id.txtfirtname);
+        lastname=findViewById(R.id.txtLastname);
+        birthname=findViewById(R.id.txtDate);
+        gender=findViewById(R.id.radioButton2);
+        //imagBase64="ASdasda";
+        decivename=findViewById(R.id.txtDecivename);
+        macadress=findViewById(R.id.txtMac);
 
         idpatient=getIntent().getExtras().getString("idpatient");
         nameTutor.setText(getIntent().getExtras().getString("nameTutor"));

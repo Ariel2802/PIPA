@@ -24,6 +24,7 @@ import java.util.List;
 
 public class ListaPacientes extends AppCompatActivity {
 
+<<<<<<< HEAD
     List<Paciente>  list=new ArrayList<Paciente>();
     ArrayAdapter<Paciente> arrayAdapterPaciente;
     FirebaseDatabase firebaseDatabase;
@@ -32,6 +33,17 @@ public class ListaPacientes extends AppCompatActivity {
     Paciente pacienteSelect;
     TextView textView;
     String idUsuario;
+=======
+    List<paciente>  list=new ArrayList<>();
+    ArrayAdapter<paciente> arrayAdapterPaciente;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    ListView listaView;
+    paciente pacienteSelect;
+    TextView textView;
+    String idUsuario;
+
+>>>>>>> parent of f8958c6 (ruta)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +52,22 @@ public class ListaPacientes extends AppCompatActivity {
         idUsuario=getIntent().getExtras().getString("idUsuario");
         inicializarFirebase();
         listapaciente();
+<<<<<<< HEAD
         textView=findViewById(R.id.nombresss);
 
     listaView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
             pacienteSelect=(Paciente) parent.getItemAtPosition(position);
+=======
+        //textView=findViewById(R.id.nombresss);
+
+       /* listaView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            pacienteSelect=(paciente) parent.getItemAtPosition(position);
+>>>>>>> parent of f8958c6 (ruta)
             String idpatient, nameTutor,firstname,lastname, birthname, gender, imagBase64, decivename,macadress,state;
             idpatient=pacienteSelect.getIdpatient();
             nameTutor=pacienteSelect.getNameTutor();
@@ -58,8 +80,13 @@ public class ListaPacientes extends AppCompatActivity {
             macadress=pacienteSelect.getMacadress();
             state=pacienteSelect.getState();
 
+<<<<<<< HEAD
             Intent i = new Intent(ListaPacientes.this,EditarPaciente.class);
             i.putExtra("idpatient",idpatient);
+=======
+            Intent i = new Intent(listapacientes.this,editarpaciente.class);
+           i.putExtra("idpatient",idpatient);
+>>>>>>> parent of f8958c6 (ruta)
             i.putExtra("nameTutor",nameTutor);
             i.putExtra("firstname",firstname);
             i.putExtra("lastname",lastname);
@@ -69,6 +96,7 @@ public class ListaPacientes extends AppCompatActivity {
             i.putExtra("decivename",decivename);
             i.putExtra("macadress",macadress);
             i.putExtra("state",state);
+<<<<<<< HEAD
 
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
@@ -88,6 +116,43 @@ public class ListaPacientes extends AppCompatActivity {
         });
 
 
+=======
+
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+            return false;
+        }
+    });
+        listaView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                pacienteSelect=(paciente) parent.getItemAtPosition(position);
+                textView.setText(pacienteSelect.getIdpatient()+"\n "
+                                +pacienteSelect.getBirthname()+"\n "
+                                +pacienteSelect.getGender()+"\n "
+                                +pacienteSelect.getMacadress());
+            }
+        });*/
+    }
+    public void goaddPaciente(View view)
+    {
+        Intent i = new Intent(this,registrarpaciente.class);
+        i.putExtra("idUsuario",idUsuario);
+        startActivity(i);
+    }
+    public void goMapa(View view)
+    {
+        Intent i = new Intent(this,mapa.class);
+        i.putExtra("idUsuario",idUsuario);
+        startActivity(i);
+    }
+    public void goHome(View view)
+    {
+        Intent i = new Intent(this,HomeActivity.class);
+        i.putExtra("idUsuario",idUsuario);
+        startActivity(i);
+>>>>>>> parent of f8958c6 (ruta)
     }
 
     private void listapaciente() {
